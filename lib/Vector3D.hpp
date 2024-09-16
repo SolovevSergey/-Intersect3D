@@ -6,7 +6,7 @@ class Vector3D final{
     double Y;
     double Z;
 public:
-    static constexpr double EPS = 1e-10;
+    static constexpr double EPS = 1e-7;
     static bool is_equal(double a, double b); 
 
     Vector3D(double x, double y, double z);

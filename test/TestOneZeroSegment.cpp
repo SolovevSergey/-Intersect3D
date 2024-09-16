@@ -15,7 +15,7 @@ static void NotExist(const Vector3D& A, const Vector3D& B) {
 }
 
 
-TEST(OneZeroSegment, OneExist) {
+TEST(OneSegmentIsZero, OneExist) {
     OneExist(Vector3D(1, 0, 0), 0.1);
     OneExist(Vector3D(1, 1, 0), 0.4);
     OneExist(Vector3D(1, 0, 3), 0);
@@ -26,7 +26,7 @@ TEST(OneZeroSegment, OneExist) {
     OneExist(Vector3D(1, 23, 45), 0.1);
 }
 
-TEST(OneZeroSegment, NotExist) {
+TEST(OneSegmentIsZero, NotExist) {
     NotExist(Vector3D(1, 0, 0), Vector3D(0, 1, 0));
     NotExist(Vector3D(1, 1, 0), Vector3D(0, 0, 1));
     NotExist(Vector3D(1, 0, 3), Vector3D(1, 0, 0));

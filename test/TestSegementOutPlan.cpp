@@ -7,7 +7,7 @@ static void NotExist(const Vector3D& A, const Vector3D& B, const Vector3D& C) {
     }
 }
 
-TEST(OutPlanSegment, NotExist) {
+TEST(SegmentOutPlane, NotExist) {
     NotExist(Vector3D(1, 0, 0), Vector3D(0, 1, 0), Vector3D(1e4, 1e-4, 0));
     NotExist(Vector3D(1, 1, 0), Vector3D(0, 0, 1), Vector3D(1, 0, 3));
     NotExist(Vector3D(1, 0, 3), Vector3D(1, 0, 0), Vector3D(1, 3, 4));

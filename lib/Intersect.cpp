@@ -21,19 +21,27 @@ Vector3D Intersect(const Segment3D& segment1, const Segment3D& segment2) {
     Vector3D Y = segment2.getStart() - segment1.getStart();
     Vector3D Test = segment2.getEnd() - segment1.getStart();
 
+
     if (X.is_parallel_to(Y)) {
         if (Test.is_parallel_to(Y)) {
-            if (X.is_not_zero()) {
-                return X * Intersect1D(0, 1, (X*Y) / (X * X), (Test * X) / (X * X)) + segment1.getStart();
+            if (Test.is_parallel_to(X)) {
+                if (X.is_not_zero()) {
+                    return X * Intersect1D(0, 1, (X * Y) / (X * X), (Test * X) / (X * X)) + segment1.getStart();
+                }
+                if (Y.is_not_zero()) {
+                    return Y * Intersect1D(0, 0, 1, (Test * Y) / (Y * Y)) + segment1.getStart();
+                }
+                return segment1.getStart();
             }
-            if (Y.is_not_zero()) {
-                return Y * Intersect1D(0, 0, 1, (Test * Y) / (Y * Y)) + segment1.getStart();
-            }
-            return segment1.getStart();
+            std::swap(Y, Test);
         }
         else {
-            // swap X and t 
-            std::swap(X, Test);
+            if (X == Vector3D(0, 0, 0)) {
+                throw ResultNotExist(); // Сегменты не лежат на прямой
+            }
+
+            // swap Y and  Test for create plane base <X, Y>: X||Y and NOT X||Test
+            std::swap(Y, Test);
         }
     }
     else{
@@ -53,8 +61,8 @@ Vector3D Intersect(const Segment3D& segment1, const Segment3D& segment2) {
     // calc cordinates of vector t in <X,Y>  
     double test_x = (x_y * (Test*Y) - y_y * (Test*X))/(x_y*x_y - x_x*y_y);
     double test_y = (x_y * (Test*X) - x_x * (Test*Y))/(x_y*x_y - x_x*y_y);
-    if (test_x + test_y <= 1 && test_x <= 0 && test_y >= 0) {
-        return Y*test_y/(1 - test_x) + segment1.getStart();
+    if (test_x + test_y <= 1 && test_x >= 0 && test_y <= 0) {
+        return X*test_x/(1 - test_y) + segment1.getStart();
     }
     throw ResultNotExist();
 }

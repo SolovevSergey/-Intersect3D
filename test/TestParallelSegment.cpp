@@ -14,7 +14,7 @@ static void NotExist(const Vector3D& A) {
     TestNotExist(A, A*2, A*3, A*4);
 }
 
-TEST(ParallelSegment, OneExist) {
+TEST(SegmentParallel, OneExist) {
     OneExist(Vector3D(1, 0, 0));
     OneExist(Vector3D(0, 0, 1));
     OneExist(Vector3D(0, 1, 0));
@@ -25,7 +25,7 @@ TEST(ParallelSegment, OneExist) {
     OneExist(Vector3D(1e4, 1e-4, 0));
 }
 
-TEST(ParallelSegment, NotExist) { 
+TEST(SegmentParallel, NotExist) {
     NotExist(Vector3D(1, 0, 0));
     NotExist(Vector3D(0, 0, 1));
     NotExist(Vector3D(0, 1, 0));
@@ -37,7 +37,7 @@ TEST(ParallelSegment, NotExist) {
     NotExist(Vector3D(1e4, 1e-4, 0));
 }
 
-TEST(ParallelSegment, ManyExist) { 
+TEST(SegmentParallel, ManyExist) {
     ManyExist(Vector3D(1, 0, 0));
     ManyExist(Vector3D(0, 0, 1));
     ManyExist(Vector3D(0, 1, 0));

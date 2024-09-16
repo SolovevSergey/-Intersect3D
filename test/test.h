@@ -1,8 +1,7 @@
 #pragma once
 #include "../lib/Intersect.hpp"
 
-#include <gtest/gtest.h>
-// #include <gmock/gmock.h>
+#include "gtest/gtest.h"
 
 Vector3D GetRandomVec();
 
