@@ -16,45 +16,54 @@ double Intersect1D(double x1, double x2, double y1, double y2) {
 
 Vector3D Intersect(const Segment3D& segment1, const Segment3D& segment2) {
     // calc basic vectors 
-    // TODO: rename x,y,t
-    Vector3D x = segment1.getEnd() - segment1.getStart();
-    Vector3D y = segment2.getStart() - segment1.getStart();
-    Vector3D test = segment2.getEnd() - segment1.getStart();
+    // TODO: rename X,Y,t
+    Vector3D X = segment1.getEnd() - segment1.getStart();
+    Vector3D Y = segment2.getStart() - segment1.getStart();
+    Vector3D Test = segment2.getEnd() - segment1.getStart();
 
-    if (x.is_parallel_to(y)) {
-        if (test.is_parallel_to(y)) {
-            if (x.is_not_zero()) {
-                return x * Intersect1D(0, 1, (x*y) / (x * x), (test * x) / (x * x)) + segment1.getStart();
+    if (X.is_parallel_to(Y)) {
+        if (Test.is_parallel_to(Y)) {
+            if (X.is_not_zero()) {
+                return X * Intersect1D(0, 1, (X*Y) / (X * X), (Test * X) / (X * X)) + segment1.getStart();
             }
-            if (y.is_not_zero()) {
-                return y * Intersect1D(0, 0, 1, (test * y) / (y * y)) + segment1.getStart();
+            if (Y.is_not_zero()) {
+                return Y * Intersect1D(0, 0, 1, (Test * Y) / (Y * Y)) + segment1.getStart();
             }
             return segment1.getStart();
         }
         else {
-            // swap x and t 
-            std::swap(x, test);
+            // swap X and t 
+            std::swap(X, Test);
         }
     }
     else{
         // Находятся ли векторы на одной плоскости
-        Vector3D test_norm_x = test - test.vector_projection_on(x);
-        Vector3D test_norm_y_x = test_norm_x - test_norm_x.vector_projection_on(y);
-        if (test_norm_y_x.is_not_zero()) {
+        Vector3D Test_norm_x = Test - Test.vector_projection_on(X);
+        Vector3D Test_norm_y_x = Test_norm_x - Test_norm_x.vector_projection_on(Y);
+        if (Test_norm_y_x.is_not_zero()) {
             throw ResultNotExist(); // Сегменты не лежат в одной плоскости
         }
     }
-    std::terminate();
-    // x,y - base vectors in plane
+    // std::terminate();
+    // X,Y - base vectors in plane
     
-    double x_x = x*x;
-    double y_y = y*y;
-    double x_y = x*y;
-    // calc cordinates of vector t in <x,y>  
-    double test_x = (x_y * (test*y) - y_y * (test*x))/(x_y*x_y - x_x*y_y);
-    double test_y = (x_y * (test*x) - x_x * (test*y))/(x_y*x_y - x_x*y_y);
+    double x_x = X*X;
+    double y_y = Y*Y;
+    double x_y = X*Y;
+    // calc cordinates of vector t in <X,Y>  
+    double test_x = (x_y * (Test*Y) - y_y * (Test*X))/(x_y*x_y - x_x*y_y);
+    double test_y = (x_y * (Test*X) - x_x * (Test*Y))/(x_y*x_y - x_x*y_y);
     if (test_x + test_y <= 1 && test_x <= 0 && test_y >= 0) {
-        return y*test_y/(std::abs(test_x) + 1) + segment1.getStart();
+        return Y*test_y/(1 - test_x) + segment1.getStart();
     }
     throw ResultNotExist();
 }
+
+/* 
+[  FAILED  ] OneZeroSegment.NotExist
+[  FAILED  ] OutPlanSegment.NotExist
+[  FAILED  ] OnPlaneSegment.OneExist
+// 
+[  FAILED  ] OneZeroSegment.NotExist
+[  FAILED  ] OnPlaneSegment.OneExist
+*/

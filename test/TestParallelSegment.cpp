@@ -2,7 +2,8 @@
 
 
 static void OneExist(const Vector3D& A){
-    TestOneExist(A, A*2, A*2, A*4, A*2);
+    Vector3D O = Vector3D(0, 0, 0);
+    TestOneExist(O, A, A, A*2, A);
 }
 
 static void ManyExist(const Vector3D& A) {
@@ -10,7 +11,7 @@ static void ManyExist(const Vector3D& A) {
 }
 
 static void NotExist(const Vector3D& A) {
-    TestNotExist(A, A*3, A*2, A*4);
+    TestNotExist(A, A*2, A*3, A*4);
 }
 
 TEST(ParallelSegment, OneExist) {

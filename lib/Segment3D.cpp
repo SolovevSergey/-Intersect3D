@@ -7,7 +7,7 @@ Vector3D Segment3D::getStart() const {
 }
 
 Vector3D Segment3D::getEnd() const {
-    return start;
+    return end;
 }
 
 
