@@ -3,7 +3,7 @@
 
 
 bool Vector3D::is_equal(double a, double b){
-    //return std::fabs(a - b) < std::numeric_limits<double>::epsilon();
+    // return std::fabs(a - b) < std::numeric_limits<double>::epsilon();
     return std::fabs(a - b) < Vector3D::EPS;
 }; 
 
