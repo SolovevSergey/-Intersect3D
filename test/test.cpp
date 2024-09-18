@@ -47,9 +47,5 @@ int main(int argc, char **argv)
 {
   ::testing::InitGoogleTest(&argc, argv);
   // ::testing::InitGoogleMock(&argc, argv);
-  
-
-  std::cout << Vector3D::EPS << std::endl;
-
   return RUN_ALL_TESTS();
 }

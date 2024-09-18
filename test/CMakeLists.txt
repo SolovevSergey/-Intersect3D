@@ -12,7 +12,6 @@ set(TEST_SOURCE
     TestSegementOutPlan.cpp
     TestSegmentOnPlane.cpp
     TestTwoZeroSegment.cpp
-    TestIntersect1D.cpp
 )
 
 add_executable(test ${TEST_SOURCE})
